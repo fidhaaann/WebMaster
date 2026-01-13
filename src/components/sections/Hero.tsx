@@ -56,11 +56,11 @@ export default function Hero() {
     const words = titleText.split(' ')
     title.innerHTML = words
       .map((word, i) => 
-        `<span class="inline-block overflow-hidden mx-1 md:mx-2">
+        `<span class="inline-block overflow-hidden">
           <span class="inline-block word-span" style="transform: translateY(100%)">${word}</span>
         </span>`
       )
-      .join('')
+      .join(' ')
 
     const wordSpans = title.querySelectorAll('.word-span')
     

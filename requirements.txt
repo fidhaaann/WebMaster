@@ -1,0 +1,57 @@
+# LINK CAMP 2025 - Project Requirements
+# =====================================
+# 
+# This file documents all dependencies and tools required to run the project.
+# 
+# PREREQUISITES:
+# - Node.js >= 18.17.0 (LTS recommended)
+# - npm >= 9.0.0 or yarn >= 1.22.0 or pnpm >= 8.0.0
+#
+# INSTALLATION:
+# 1. Navigate to the project directory
+# 2. Run: npm install (or yarn install / pnpm install)
+# 3. Start development server: npm run dev
+# 4. Open http://localhost:3000 in your browser
+#
+# =====================================
+
+# Core Framework
+next==14.0.4                    # React framework with App Router
+react==18.2.0                   # UI library
+react-dom==18.2.0               # React DOM rendering
+
+# Animation Libraries
+gsap==3.12.4                    # GreenSock Animation Platform
+@gsap/react==2.1.0              # GSAP React integration hooks
+
+# UI & Styling
+tailwindcss==3.4.1              # Utility-first CSS framework
+autoprefixer==10.4.16           # PostCSS plugin for vendor prefixes
+postcss==8.4.33                 # CSS transformation tool
+lucide-react==0.303.0           # Modern icon library
+clsx==2.1.0                     # Utility for constructing className strings
+tailwind-merge==2.2.0           # Merge Tailwind classes without conflicts
+
+# TypeScript Support
+typescript==5.3.3               # TypeScript language
+@types/node==20.10.6            # Node.js type definitions
+@types/react==18.2.46           # React type definitions
+@types/react-dom==18.2.18       # React DOM type definitions
+
+# Code Quality
+eslint==8.56.0                  # JavaScript linter
+eslint-config-next==14.0.4      # Next.js ESLint configuration
+
+# =====================================
+# AVAILABLE SCRIPTS:
+# - npm run dev      : Start development server with hot reload
+# - npm run build    : Create optimized production build
+# - npm run start    : Start production server
+# - npm run lint     : Run ESLint for code quality checks
+# =====================================
+
+# DEPLOYMENT OPTIONS:
+# - Vercel (recommended): Connect GitHub repo for automatic deployments
+# - Netlify: Use 'next build' and deploy '.next' folder
+# - Docker: Use provided Dockerfile (if applicable)
+# - Self-hosted: Run 'npm run build && npm run start'

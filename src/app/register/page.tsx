@@ -74,6 +74,66 @@ const ticketOptions = [
 const yearOptions = ['1st Year', '2nd Year', '3rd Year', '4th Year', 'Graduate', 'Other']
 const tshirtSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 
+// InputField component moved outside to prevent re-creation on every render
+interface InputFieldProps {
+  name: keyof FormData
+  label: string
+  type?: string
+  icon?: typeof User
+  placeholder?: string
+  required?: boolean
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  error?: string
+}
+
+const InputField = ({ 
+  name, 
+  label, 
+  type = 'text', 
+  icon: Icon, 
+  placeholder,
+  required = false,
+  value,
+  onChange,
+  error
+}: InputFieldProps) => (
+  <div className="space-y-2">
+    <label htmlFor={name} className="block text-sm font-medium text-deep dark:text-soft">
+      {label} {required && <span className="text-accent">*</span>}
+    </label>
+    <div className="relative">
+      {Icon && (
+        <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/60" />
+      )}
+      <input
+        type={type}
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={cn(
+          'w-full rounded-xl border-2 bg-soft/50 dark:bg-dark-surface/50',
+          'py-3 transition-all duration-300',
+          'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
+          'placeholder:text-deep/40 dark:placeholder:text-soft/40',
+          Icon ? 'pl-12 pr-4' : 'px-4',
+          error 
+            ? 'border-red-400 dark:border-red-500' 
+            : 'border-primary/20 dark:border-primary/30'
+        )}
+      />
+    </div>
+    {error && (
+      <p className="text-sm text-red-500 flex items-center gap-1">
+        <AlertCircle className="w-4 h-4" />
+        {error}
+      </p>
+    )}
+  </div>
+)
+
 export default function RegisterPage() {
   const formRef = useRef<HTMLFormElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
@@ -225,57 +285,6 @@ export default function RegisterPage() {
     )
   }
 
-  const InputField = ({ 
-    name, 
-    label, 
-    type = 'text', 
-    icon: Icon, 
-    placeholder,
-    required = false 
-  }: {
-    name: keyof FormData
-    label: string
-    type?: string
-    icon?: typeof User
-    placeholder?: string
-    required?: boolean
-  }) => (
-    <div className="space-y-2">
-      <label htmlFor={name} className="block text-sm font-medium text-deep dark:text-soft">
-        {label} {required && <span className="text-accent">*</span>}
-      </label>
-      <div className="relative">
-        {Icon && (
-          <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/60" />
-        )}
-        <input
-          type={type}
-          id={name}
-          name={name}
-          value={formData[name] as string}
-          onChange={handleInputChange}
-          placeholder={placeholder}
-          className={cn(
-            'w-full rounded-xl border-2 bg-soft/50 dark:bg-dark-surface/50',
-            'py-3 transition-all duration-300',
-            'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
-            'placeholder:text-deep/40 dark:placeholder:text-soft/40',
-            Icon ? 'pl-12 pr-4' : 'px-4',
-            errors[name] 
-              ? 'border-red-400 dark:border-red-500' 
-              : 'border-primary/20 dark:border-primary/30'
-          )}
-        />
-      </div>
-      {errors[name] && (
-        <p className="text-sm text-red-500 flex items-center gap-1">
-          <AlertCircle className="w-4 h-4" />
-          {errors[name]}
-        </p>
-      )}
-    </div>
-  )
-
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-soft dark:bg-dark-bg flex items-center justify-center p-4">
@@ -414,6 +423,9 @@ export default function RegisterPage() {
                   icon={User}
                   placeholder="John"
                   required
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  error={errors.firstName}
                 />
                 <InputField
                   name="lastName"
@@ -421,6 +433,9 @@ export default function RegisterPage() {
                   icon={User}
                   placeholder="Doe"
                   required
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  error={errors.lastName}
                 />
               </div>
 
@@ -431,6 +446,9 @@ export default function RegisterPage() {
                 icon={Mail}
                 placeholder="john@example.com"
                 required
+                value={formData.email}
+                onChange={handleInputChange}
+                error={errors.email}
               />
 
               <InputField
@@ -440,6 +458,9 @@ export default function RegisterPage() {
                 icon={Phone}
                 placeholder="+1 (555) 000-0000"
                 required
+                value={formData.phone}
+                onChange={handleInputChange}
+                error={errors.phone}
               />
             </div>
           )}
@@ -457,6 +478,9 @@ export default function RegisterPage() {
                 icon={Building2}
                 placeholder="University of Technology"
                 required
+                value={formData.institution}
+                onChange={handleInputChange}
+                error={errors.institution}
               />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -496,6 +520,9 @@ export default function RegisterPage() {
                   icon={GraduationCap}
                   placeholder="Computer Science"
                   required
+                  value={formData.department}
+                  onChange={handleInputChange}
+                  error={errors.department}
                 />
               </div>
 
@@ -503,6 +530,9 @@ export default function RegisterPage() {
                 name="studentId"
                 label="Student ID (Optional)"
                 placeholder="STU123456"
+                value={formData.studentId}
+                onChange={handleInputChange}
+                error={errors.studentId}
               />
 
               <div className="space-y-4 p-4 bg-primary/5 dark:bg-primary/10 rounded-xl">
@@ -526,6 +556,9 @@ export default function RegisterPage() {
                     label="IEEE Membership Number"
                     placeholder="12345678"
                     required
+                    value={formData.ieeeNumber}
+                    onChange={handleInputChange}
+                    error={errors.ieeeNumber}
                   />
                 )}
               </div>
@@ -674,6 +707,9 @@ export default function RegisterPage() {
                   label="Emergency Contact Name"
                   placeholder="Parent/Guardian name"
                   required
+                  value={formData.emergencyContact}
+                  onChange={handleInputChange}
+                  error={errors.emergencyContact}
                 />
                 <InputField
                   name="emergencyPhone"
@@ -682,6 +718,9 @@ export default function RegisterPage() {
                   icon={Phone}
                   placeholder="+1 (555) 000-0000"
                   required
+                  value={formData.emergencyPhone}
+                  onChange={handleInputChange}
+                  error={errors.emergencyPhone}
                 />
               </div>
 

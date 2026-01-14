@@ -23,8 +23,8 @@ const generateParticles = (count: number, seed: number = 42) => {
     particles.push({
       left: nextRandom() * 100,
       top: nextRandom() * 100,
-      delay: nextRandom() * 5,
-      duration: 4 + nextRandom() * 4,
+      delay: nextRandom() * 2,
+      duration: 2 + nextRandom() * 2,
     })
   }
   return particles
@@ -87,26 +87,14 @@ export default function Hero() {
       },
     })
 
-    // Title animation - split into words
-    const titleText = title.textContent || ''
-    const words = titleText.split(' ')
-    title.innerHTML = words
-      .map((word, i) => 
-        `<span class="inline-block overflow-hidden">
-          <span class="inline-block word-span" style="transform: translateY(100%)">${word}</span>
-        </span>`
-      )
-      .join(' ')
-
-    const wordSpans = title.querySelectorAll('.word-span')
-    
-    gsap.to(wordSpans, {
+    // Title animation - animate all together
+    gsap.set(title, { opacity: 0, y: 40 })
+    gsap.to(title, {
+      opacity: 1,
       y: 0,
-      duration: 0.6,
-      stagger: 0.08,
+      duration: 0.5,
       ease: 'power3.out',
-      delay: 0.2,
-      clearProps: 'transform',
+      delay: 0.1,
     })
 
     // Content fade in - set initial state first
@@ -116,17 +104,17 @@ export default function Hero() {
     gsap.to(contentElements, {
       opacity: 1,
       y: 0,
-      duration: 0.6,
-      stagger: 0.1,
+      duration: 0.35,
+      stagger: 0.06,
       ease: 'power3.out',
-      delay: 0.5,
+      delay: 0.25,
     })
 
     // Scroll indicator animation
     if (scrollIndicator) {
       gsap.to(scrollIndicator, {
-        y: 10,
-        duration: 1.5,
+        y: 8,
+        duration: 0.8,
         repeat: -1,
         yoyo: true,
         ease: 'power2.inOut',

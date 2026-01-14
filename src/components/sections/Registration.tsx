@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 import { 
   ArrowRight, 
   Ticket, 
@@ -272,7 +273,8 @@ export default function Registration() {
               </ul>
 
               {/* CTA Button */}
-              <button
+              <Link
+                href="/register"
                 className={cn(
                   'w-full py-4 rounded-full font-semibold',
                   'flex items-center justify-center gap-2',
@@ -285,7 +287,7 @@ export default function Registration() {
               >
                 <span>Register Now</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover/btn:translate-x-1" />
-              </button>
+              </Link>
 
               {/* Card Glow Effect */}
               {tier.highlighted && (

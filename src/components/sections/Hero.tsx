@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { cn } from '@/lib/utils'
@@ -10,6 +10,27 @@ import Image from 'next/image'
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
+
+// Generate deterministic particle positions to avoid hydration mismatch
+const generateParticles = (count: number, seed: number = 42) => {
+  const particles = []
+  let random = seed
+  const nextRandom = () => {
+    random = (random * 9301 + 49297) % 233280
+    return random / 233280
+  }
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      left: nextRandom() * 100,
+      top: nextRandom() * 100,
+      delay: nextRandom() * 5,
+      duration: 4 + nextRandom() * 4,
+    })
+  }
+  return particles
+}
+
+const PARTICLES = generateParticles(30)
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -181,15 +202,15 @@ export default function Hero() {
         />
 
         {/* Floating Particles */}
-        {[...Array(30)].map((_, i) => (
+        {PARTICLES.map((particle, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-soft/40 rounded-full animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 4}s`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              animationDelay: `${particle.delay}s`,
+              animationDuration: `${particle.duration}s`,
             }}
           />
         ))}

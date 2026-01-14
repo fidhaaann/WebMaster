@@ -207,8 +207,8 @@ export default function Hero() {
         <div className="animate-in mb-8">
           <span className={cn(
             'inline-flex items-center gap-2 px-4 py-2 rounded-full',
-            'bg-primary/10 border border-primary/20',
-            'text-primary font-medium text-sm'
+            'bg-soft/20 dark:bg-primary/20 border border-soft/30 dark:border-primary/30 backdrop-blur-sm',
+            'text-soft dark:text-primary font-medium text-sm drop-shadow-md'
           )}>
             <Sparkles className="w-4 h-4" />
             IEEE LINK presents

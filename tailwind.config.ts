@@ -45,14 +45,14 @@ const config: Config = {
         display: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-out forwards',
-        'fade-up': 'fadeUp 0.6s ease-out forwards',
-        'slide-in': 'slideIn 0.4s ease-out forwards',
-        'scale-in': 'scaleIn 0.3s ease-out forwards',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
-        'underline-expand': 'underlineExpand 0.3s ease-out forwards',
-        'menu-slide': 'menuSlide 0.4s ease-out forwards',
+        'fade-in': 'fadeIn 0.3s ease-out forwards',
+        'fade-up': 'fadeUp 0.35s ease-out forwards',
+        'slide-in': 'slideIn 0.25s ease-out forwards',
+        'scale-in': 'scaleIn 0.2s ease-out forwards',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-glow': 'pulseGlow 1.2s ease-in-out infinite',
+        'underline-expand': 'underlineExpand 0.2s ease-out forwards',
+        'menu-slide': 'menuSlide 0.25s ease-out forwards',
       },
       keyframes: {
         fadeIn: {

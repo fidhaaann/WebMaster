@@ -210,7 +210,7 @@ export default function Hero() {
       {/* Content */}
       <div
         ref={contentRef}
-        className="relative z-10 inline-block mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white/10 dark:bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl rounded-3xl transition-all w-full max-w-2xl"
+        className="relative z-10 inline-block mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white/10 dark:bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl rounded-3xl transition-all w-full max-w-3xl"
       >
         {/* Badge */}
         <div className="animate-in mb-8">

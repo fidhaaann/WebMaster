@@ -95,7 +95,7 @@ export default function Navbar() {
       )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center h-20">
           {/* Logo */}
           <Link 
             href="#home" 
@@ -116,30 +116,33 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              link.isPage ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="nav-link py-2 px-4 bg-primary text-soft rounded-full hover:bg-accent transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={cn(
-                    'nav-link py-2',
-                    activeSection === link.href.substring(1) && 'active'
-                  )}
-                >
-                  {link.label}
-                </a>
-              )
+          {/* Desktop Navigation (left links) */}
+          <div className="hidden md:flex items-center gap-8 ml-8">
+            {navLinks.filter(link => !link.isPage).map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={cn(
+                  'nav-link py-2',
+                  activeSection === link.href.substring(1) && 'active'
+                )}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Register Button (right) */}
+          <div className="hidden md:flex items-center ml-auto">
+            {navLinks.filter(link => link.isPage && link.label === 'Register').map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="nav-link py-2 px-4 bg-primary text-soft rounded-full hover:bg-accent transition-colors"
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
 

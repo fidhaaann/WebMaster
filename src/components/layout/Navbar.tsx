@@ -95,7 +95,7 @@ export default function Navbar() {
       )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-20">
+        <div className="flex items-center h-20 relative">
           {/* Logo */}
           <Link 
             href="#home" 
@@ -116,8 +116,8 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation (left links) */}
-          <div className="hidden md:flex items-center gap-8 ml-8">
+          {/* Desktop Navigation (centered links) */}
+          <div className="hidden md:flex items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             {navLinks.filter(link => !link.isPage).map((link) => (
               <a
                 key={link.href}
@@ -133,8 +133,8 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Register Button (right) */}
-          <div className="hidden md:flex items-center ml-auto">
+          {/* Register Button and Theme Toggle (right) */}
+          <div className="hidden md:flex items-center ml-auto gap-6">
             {navLinks.filter(link => link.isPage && link.label === 'Register').map((link) => (
               <Link
                 key={link.href}
@@ -144,10 +144,6 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-          </div>
-
-          {/* Theme Toggle & Mobile Menu Button */}
-          <div className="flex items-center gap-4">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -175,11 +171,13 @@ export default function Navbar() {
                 )}
               />
             </button>
+          </div>
 
-            {/* Mobile Menu Button */}
+          {/* Mobile Menu Button */}
+          <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden relative w-12 h-12 rounded-full flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-colors"
+              className="relative w-12 h-12 rounded-full flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-colors"
               aria-label="Toggle mobile menu"
             >
               <Menu 

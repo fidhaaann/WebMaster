@@ -79,6 +79,7 @@ export default function Footer() {
       >
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="#home" className="flex items-center gap-3 mb-6 group">
@@ -118,31 +119,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-display font-semibold text-lg text-soft mb-6">
-              Quick Links
-            </h3>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className={cn(
-                      'text-soft/60 hover:text-primary transition-colors duration-300',
-                      'flex items-center gap-2 group'
-                    )}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50 group-hover:bg-primary transition-colors" />
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Quick Links removed as requested */}
 
-          {/* Contact Info */}
-          <div>
+          {/* Contact Info (right section) */}
+          <div className="lg:col-span-1 lg:col-start-4">
             <h3 className="font-display font-semibold text-lg text-soft mb-6">
               Contact Us
             </h3>
@@ -169,8 +149,9 @@ export default function Footer() {
                 <div className="flex items-start gap-3 text-soft/60">
                   <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                   <span>
-                    Innovation Hub, Tech Campus<br />
-                    Silicon Valley, CA 94025
+                    1234 Dreamscape Avenue<br />
+                    Fantasia City, IM 56789<br />
+                    United Realms of Imagination
                   </span>
                 </div>
               </li>
